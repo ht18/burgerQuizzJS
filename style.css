@@ -46,7 +46,7 @@ img {
 
 .question {
     width: 100vw;
-    height: 10vh;
+    height: 5vh;
     text-align: center;
     color: black;
 }
@@ -62,8 +62,8 @@ img {
 .answer {
     background-color: rgb(234, 182, 118);
     height: 25vh;
-    width: 47vw;
-    margin: 1vw;
+    width: 45vw;
+    margin-bottom: 1vh;
     border-radius: 2vw;
     color: whitesmoke;
     display: flex;
@@ -72,16 +72,40 @@ img {
     align-items: center;
     font-weight: bold;
     font-size: calc(100vw/25);
+    margin: 1vh;
+    margin-top: 0;
 }
 
 .score {
     height: 5vh;
-    width: 20vh;
+    width: auto;
     background-color: rgb(234, 182, 118);
-    border-radius: 10%;
-    position: relative;
     color: whitesmoke;
     text-align: center;
+
+}
+
+.points {
+    width: 15vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+}
+
+.points>* {
+    height: 5vh;
+    background-color: brown;
+    border-radius: 10%;
+
+}
+
+#timer {
+    color: whitesmoke;
+    vertical-align: center;
 }
 
 footer {
