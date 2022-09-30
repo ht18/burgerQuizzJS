@@ -8,7 +8,7 @@ const scoreDiv = document.querySelector(".score");
 const timerDiv = document.querySelector("#timer");
 let arrayOfAnswers = [];
 
-//API
+
 let temps = 15;
 function timer() {
     timerDiv.innerText = temps;
@@ -17,6 +17,7 @@ function timer() {
 
 setInterval(timer, 1000);
 
+//API
 fetch("https://the-trivia-api.com/api/questions?categories=arts_and_literature&limit=10&region=FR&difficulty=easy")
     .then(res => res.json())
     .then((data) => {
@@ -45,7 +46,9 @@ fetch("https://the-trivia-api.com/api/questions?categories=arts_and_literature&l
         console.log(arrayOfAnswers);
 
         //ajout des questions et réponses au HTML
-        for (let l = 0; l < arrayOfAnswers.length; l++) {
+        let l = 0;
+
+        function loadQuestion(p) {
             answer.forEach((div) => {
                 const question = data[l].question;
                 const answer1Data = arrayOfAnswers[l][0].status;
@@ -65,18 +68,25 @@ fetch("https://the-trivia-api.com/api/questions?categories=arts_and_literature&l
             })
         }
 
+        loadQuestion(l);
+
         console.log(answer);
 
         //vérification du statut de la réponse
+        let counter = 0;
+
         answer.forEach((div) => {
             div.addEventListener('click', (e) => {
                 e.stopPropagation();
-                let counter = 0;
+
                 const status = div.firstChild.dataset.status;
                 if (status === "True") {
                     counter++;
                 }
+                loadQuestion(l++);
                 scoreDiv.innerHTML = `Your score is : ${counter}`;
+
+
             })
         })
 
