@@ -1,3 +1,6 @@
+// déclaration des variables
+
+//HTML sélection
 const questionDiv = document.querySelector(".question");
 const answer1 = document.querySelector("#a1");
 const answer2 = document.querySelector("#a2");
@@ -7,29 +10,39 @@ const answers = document.querySelector(".answers");
 const answer = document.querySelectorAll(".answer");
 const scoreDiv = document.querySelector(".score");
 const timerDiv = document.querySelector("#timer");
-let arrayOfAnswers = [];
-let finalScore = 0;
-const buttons = Array.from(document.querySelectorAll(".button"));
-
+const buttons = document.querySelectorAll(".button");
+const main = document.getElementsByTagName("main")
+const difficulty = document.querySelector(".difficulty");
 const easy = document.getElementById("easy");
 const medium = document.getElementById("medium");
 const hard = document.getElementById("hard");
+
+//Déclaration des variables autres
+let time = 60;
+let finalScore = 0;
 let arrayOfURL = ["https://the-trivia-api.com/api/questions?categories=arts_and_literature&limit=31&region=FR&difficulty=easy", "https://the-trivia-api.com/api/questions?categories=arts_and_literature&limit=31&region=FR&difficulty=medium", "https://the-trivia-api.com/api/questions?categories=arts_and_literature&limit=31&region=FR&difficulty=hard"]
+let arrayOfAnswers = [];
 
-
+// Sélection de l'URL en fonction de la difficulté et lancement du jeu
 const easyURL = easy.addEventListener('click', (e) => {
     let result = arrayOfURL[0];
     callAPI(result);
+    difficulty.remove();
+    timerOut();
 })
 
 const mediumURL = medium.addEventListener('click', (e) => {
     let result = arrayOfURL[1];
     callAPI(result);
+    difficulty.remove();
+    timerOut();
 })
 
 const hardURL = hard.addEventListener('click', (e) => {
     let result = arrayOfURL[2];
     callAPI(result);
+    difficulty.remove();
+    timerOut();
 })
 
 
@@ -102,9 +115,7 @@ const callAPI = (URLApi) => {
         })
 }
 
-
-
-
+//fonction qui stoppe le jeu
 function stopGame() {
     const allScore = document.createElement('article');
     allScore.classList.add('allScore');
@@ -112,22 +123,21 @@ function stopGame() {
     allScore.innerHTML = `Your final score is ${finalScore}`;
 }
 
-
-let time = 30;
-
-
-let timerOut = setInterval(function () {
-    timerDiv.innerText = time;
-    timerDiv.dataset.t = time;
-    if (time == 0) {
-        stopGame();
-        time = 0;
-        clearInterval(timerOut);
-    }
-    else {
-        time--;
-    }
-}, 1000);
+//fonction de lancement du timer
+const timerOut = function () {
+    setInterval(function () {
+        timerDiv.innerText = time;
+        timerDiv.dataset.t = time;
+        if (time == 0) {
+            stopGame();
+            time = 0;
+            clearInterval(timerOut);
+        }
+        else {
+            time--;
+        }
+    }, 1000)
+};
 
 
 
