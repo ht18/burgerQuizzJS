@@ -18,7 +18,7 @@ const medium = document.getElementById("medium");
 const hard = document.getElementById("hard");
 
 //Déclaration des variables autres
-let time = 60;
+let time = 40;
 let finalScore = 0;
 let arrayOfURL = ["https://the-trivia-api.com/api/questions?categories=arts_and_literature&limit=31&region=FR&difficulty=easy", "https://the-trivia-api.com/api/questions?categories=arts_and_literature&limit=31&region=FR&difficulty=medium", "https://the-trivia-api.com/api/questions?categories=arts_and_literature&limit=31&region=FR&difficulty=hard"]
 let arrayOfAnswers = [];
@@ -106,7 +106,13 @@ const callAPI = (URLApi) => {
                     if (status === "True") {
                         counter++;
                         finalScore++;
+                        div.style.backgroundColor = "green";
+                        setInterval(() => { div.style.backgroundColor = "rgb(234, 182, 118)" }, 300);
+                    } else {
+                        div.style.backgroundColor = "red";
+                        setInterval(() => { div.style.backgroundColor = "rgb(234, 182, 118)" }, 300);
                     }
+
                     loadQuestion(l++); //chargement d'une nouvelle question
                     scoreDiv.innerHTML = `Your score is : ${counter}`; //affichage du score dès qu'une réponse est donnée
                 })
@@ -114,6 +120,7 @@ const callAPI = (URLApi) => {
 
         })
 }
+
 
 //fonction qui stoppe le jeu
 function stopGame() {
